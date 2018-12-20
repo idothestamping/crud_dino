@@ -5,7 +5,8 @@ var dinoData = fs.readFileSync('views/dinos/dinosaurs.json');
 dinoData = JSON.parse(dinoData);
 
 
-router.get('/dinosaurs', function(req, res){
+// dinos index route
+router.get('/', function(req, res){
 	var nameFilter = req.query.nameFilter;
 	if(nameFilter){
 		var filteredData = dinoData.filter(function(dino){
@@ -18,8 +19,28 @@ router.get('/dinosaurs', function(req, res){
 	console.log(req.query);
 })
 
+// edit form route
+router.get('/edit/:idx', function(req, res){
+	res.render('dinos/edit', {dinoToEdit: dinoData[req.params.idx], dinoID: req.params.idx});
+})
 
-router.get('/dinosaurs/new', function(req, res){
+// delete dino route
+router.delete('/:idx', function(req, res){
+	//remove the dino from the dinoData array
+	dinoData.splice(req.params.idx, 1);
+	// save the new dinoData array to the json file
+	fs.writeFileSync('views/dinos/dinosaurs.json', JSON.stringify(dinoData));
+	res.redirect('/dinosaurs');
+});
+
+// edit dino route
+router.put('/:idx', function(req, res){
+	dinoData[req.params.idx].name = req.body.name;
+	dinoData[req.params.idx].type = req.body.type;
+})
+
+// new dino form
+router.get('/new', function(req, res){
 	res.render('dinos/new');
 })
 
@@ -33,8 +54,8 @@ router.get('/dinosaurs/:idx', function(req, res){
 	}
 })
 
-
-router.post('/dinosaurs', function(req, res){
+// new dino route
+router.post('/', function(req, res){
 	console.log(req.body);
 	//adding user input to the array
 	dinoData.push(req.body);

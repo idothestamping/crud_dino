@@ -1,12 +1,19 @@
-<br>
-<ul>
-  <% myDinos.forEach(function(dino) { %>
-    <li><%= dino.name %> is a <%= dino.type %></li>
-  <% }) %>
-</ul>
 
 <form method="GET" action="/dinosaurs">
 	<label for="namefilter">Filter by Name</label>
 	<input id="nameFilter" type="text" name="nameFilter" autocomplete="off" placeholder="ex. Littlefoot" >
 	<input type="submit">
 </form>
+
+<br>
+<ul>
+  <% myDinos.forEach(function(dino, index) { %>
+    <li>
+    	<%= dino.name %> is a <%= dino.type %>
+    	<a href="/dinosaurs/edit/<%= index %>">EDIT</a>
+    	<form method="POST" action="/dinosaurs/<%= index %>/?_method=DELETE">
+    		<input type="submit" value="Delete">
+    	</form>
+    </li>
+  <% }) %>
+</ul>

@@ -5,6 +5,10 @@ var prehistoric_creaturesData = fs.readFileSync('views/creatures/prehistoric_cre
 prehistoric_creaturesData = JSON.parse(prehistoric_creaturesData);
 
 
+router.get('/', function(req, res){
+		res.render('prehistoric_creatures');
+});
+
 router.get('/prehistoric_creatures', function(req, res){
 	var nameFilter = req.query.nameFilter;
 	if(nameFilter){

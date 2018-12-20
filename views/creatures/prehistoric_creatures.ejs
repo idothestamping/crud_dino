@@ -4,10 +4,8 @@
 	<h3>List of Prehistoric Creatures</h3>
   <% myPrehist.forEach(function(prehist) { %>
     <li><%= prehist.type %></li>
-    
-<img src="<%= prehist.img_url %>" width="40%" height="50%">
-
   <% }) %>
+  <img src="<%= prehist.img_url %>" width="40%" height="50%">
 </ul>
 <br>
 <form method="GET" action="/prehistoric_creatures">
