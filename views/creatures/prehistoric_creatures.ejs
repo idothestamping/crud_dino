@@ -1,0 +1,14 @@
+<br>
+
+<ul>
+	<h3>List of Prehistoric Creatures</h3>
+  <% myPrehist.forEach(function(prehist) { %>
+    <li><%= prehist.type %></li>
+  <% }) %>
+</ul>
+<br>
+<form method="GET" action="/prehistoric_creatures">
+	<label for="namefilter">Filter by Name</label>
+	<input id="nameFilter" type="text" name="nameFilter" placeholder="ex. Mastodon"  autocomplete="off">
+	<input type="submit" value="Let's git itttt">
+</form>
